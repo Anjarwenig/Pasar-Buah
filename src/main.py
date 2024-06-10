@@ -1,27 +1,50 @@
-#Print('selamat di Pasar Buah')
+import mylib
 
-#minta input user
-nApel = int(input('masukkan jumlah Apel:'))
-nJeruk = int(input('masukkan jumlah Jeruk:'))
-nAnggur = int(input('masukkan jumlah Anggur:'))
+print('Selamat Datang di Pasar Buah!')
 
-#Definisikan harga buah
-hargaApel=10000
-hargaJeruk=15000
-hargaAnggur=20000
+# Definisikan stock buah
+stockApel = 10
+stockJeruk = 8
+stockAnggur = 15
 
-#Hitung Total Harga
-totalhargaApel = nApel*hargaApel
-totalhargaJeruk = nJeruk*hargaJeruk
-TotalhargaAnggur = nAnggur*hargaAnggur
+# Definisikan harga buah
+hargaApel = 10000
+hargaJeruk = 15000
+hargaAnggur = 20000
 
-#hitung total harga belanja
-totalbelanja = totalhargaApel+totalhargaJeruk+TotalhargaAnggur
+# Minta input jumlah buah dan hitung harga buah
+nApel, totalHargaApel = mylib.inputBuah(nama='Apel', stock=stockApel, harga=hargaApel)
+nJeruk, totalHargaJeruk = mylib.inputBuah(nama='Jeruk', stock=stockJeruk, harga=hargaJeruk)
+nAnggur, totalHargaAnggur = mylib.inputBuah(nama='Anggur', stock=stockAnggur, harga=hargaAnggur)
 
-#tampilkan rincian belanja
+# Hitung total harga belanjaan
+totalBelanja = totalHargaApel + totalHargaJeruk + totalHargaAnggur
+
+# Tampilkan rincian belanjaan
 print(f'''
-detail belanja
- Apel:{nApel}*{hargaApel} = {totalhargaApel}
-Jeruk: {nJeruk}*{hargaJeruk}= {totalhargaJeruk}
-Anggur: {nAnggur}*{hargaAnggur}= {TotalhargaAnggur}
+Detail Belanja
+      
+Apel: {nApel} x {hargaApel} = {totalHargaApel}
+Jeruk: {nJeruk} x {hargaJeruk} = {totalHargaJeruk}
+Anggur: {nAnggur} x {hargaAnggur} = {totalHargaAnggur}
+
+Total: {totalBelanja}
 ''')
+
+# Proses pembayaran
+while True:
+    # Input jumlah uang
+    bayar = int(input('Silahkan masukkan uang Anda: '))
+
+    # Hitung selisih antara bayar dengan total
+    selisih = totalBelanja - bayar
+
+    # Bandingkan antara uang dengan total harga
+    if selisih > 0: 
+        print(f'Uang Anda kurang sebesar Rp.{selisih}')
+        continue
+    
+    # Ucapkan terima kasih ketika selesai pembayaran
+    else:
+        print(f'''Terimakasih. Uang kembalian Anda: {abs(selisih)}''')
+        break
